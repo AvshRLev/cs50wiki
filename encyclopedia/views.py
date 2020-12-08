@@ -2,7 +2,7 @@ import markdown2
 import html2markdown
 from django.shortcuts import render
 from django import forms
-
+from random import choice
 
 from . import util
 
@@ -103,3 +103,8 @@ def edit(request):
     return render(request, "encyclopedia/edit.html", {
         "form": NewEntryForm(initial={'title': title, 'entry': html2markdown.convert(entry)})
     })
+
+def random(request):
+    entry_list = [each_entry.lower() for each_entry in util.list_entries()]
+    random = choice(entry_list)
+    return entry(request, random)
