@@ -82,3 +82,6 @@ def new(request):
     return render(request, "encyclopedia/new.html", {
         "form": NewEntryForm()
         } )
+
+def edit(request):
+    render(request, "encyclopedia/edit.html")
