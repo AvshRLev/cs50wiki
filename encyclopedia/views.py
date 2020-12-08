@@ -1,4 +1,5 @@
 import markdown2
+import html2markdown
 from django.shortcuts import render
 from django import forms
 
@@ -83,5 +84,22 @@ def new(request):
         "form": NewEntryForm()
         } )
 
+def edit_save(request):
+    if request.method == "POST":
+        form = NewEntryForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data["title"]
+            new = form.cleaned_data["entry"]
+            util.save_entry(title, new)
+            return render(request, "encyclopedia/entry.html", {
+                    "title": title,
+                    "entry": markdown2.markdown(util.get_entry(new))
+                })
+    
+
 def edit(request):
-    render(request, "encyclopedia/edit.html")
+    title = request.POST.get('title')
+    entry = request.POST.get('entry')
+    return render(request, "encyclopedia/edit.html", {
+        "form": NewEntryForm(initial={'title': title, 'entry': html2markdown.convert(entry)})
+    })

@@ -1,11 +1,11 @@
 {% extends "encyclopedia/layout.html" %}
 
 {% block title %}
-    Create Entry
+    Edit Entry
 {% endblock %}
 
 {% block body %}
-<form action="{% url 'encyclopedia:new' %}" method="POST">
+<form action="{% url 'encyclopedia:edit_save' %}" method="POST">
     {% csrf_token %}
     {{ form }}
     <input type="submit", value="Save">
