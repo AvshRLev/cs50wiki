@@ -93,7 +93,7 @@ def edit_save(request):
             util.save_entry(title, new)
             return render(request, "encyclopedia/entry.html", {
                     "title": title,
-                    "entry": markdown2.markdown(util.get_entry(new))
+                    "entry": markdown2.markdown(util.get_entry(title))
                 })
     
 
