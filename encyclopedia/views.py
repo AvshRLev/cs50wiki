@@ -41,7 +41,7 @@ def entry(request, entry):
     if entry.lower() in entry_list :
         return render(request, "encyclopedia/entry.html", {
         "title": entry,
-        "entry":  markdown2.markdown(util.get_entry(entry))
+        "entry": markdown2.markdown(util.get_entry(entry))
     })
     
     return render(request, "encyclopedia/entry.html", {
